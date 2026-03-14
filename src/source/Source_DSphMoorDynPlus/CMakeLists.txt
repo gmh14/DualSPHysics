@@ -19,15 +19,14 @@ set(SRC DSphMoorDynPlus.cpp FunMoorDynPlus.cpp IBody.cpp IConnection.cpp IEnviro
 set(HEADER FunMoorDynPlus.h IApi.h IBody.h IConnection.h IEnvironment.h ILine.h IQSlines.h IOutput.h TypesMoorDynPlus.h Misc.h MoorDynPlus.h )
 set(SRC_EXTRA kiss_fft.c)
 set(HEADER_EXTRA _kiss_fft_guts.h kiss_fft.h kissfft.hh)
-set(DSPH_SRC ../Functions.cpp ../FunGeo3d.cpp ../JDataArrays.cpp ../JException.cpp ../JLog2.cpp ../JObject.cpp ../JSaveCsv2.cpp ../JSpVtkShape.cpp ../JRangeFilter.cpp ../JXml.cpp ../tinystr.cpp ../tinyxml.cpp ../tinyxmlerror.cpp ../tinyxmlparser.cpp )
 set(DSPH_HEADERS ../DualSphDef.h ../Functions.h ../FunGeo3d.h ../FunctionsMath.h ../JDataArrays.h ../JException.h ../JLog2.h ../JMatrix4.h ../JObject.h ../JSaveCsv2.h ../JRangeFilter.h ../JSpVtkShape.h ../JXml.h ../JXmlDef.h ../RunExceptionDef.h ../tinystr.h ../tinyxml.h )
 
 # --------------------------
 # 2. Folder organisation files
 # --------------------------
 source_group(source FILES ${SRC} ${HEADER} ${SRC_EXTRA} ${HEADER_EXTRA})
-source_group(tools FILES ${DSPH_HEADERS} ${DSPH_SRC})
-set(LibDSphMoorDynPlus_FILES ${SRC} ${HEADER} ${SRC_EXTRA} ${HEADER_EXTRA} ${DSPH_HEADERS} ${DSPH_SRC} )
+source_group(tools FILES ${DSPH_HEADERS})
+set(LibDSphMoorDynPlus_FILES ${SRC} ${HEADER} ${SRC_EXTRA} ${HEADER_EXTRA} ${DSPH_HEADERS} )
 
 # --------------------------
 # 3. Include directories
@@ -41,9 +40,8 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
   message(STATUS "GCC version: ${CMAKE_CXX_COMPILER_VERSION}")
   set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -c -O3 -static -static-libgcc -DLINUX ")
   set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -c -O3 -static -static-libgcc -std=gnu++0x -DLINUX ")
-  if(CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 4.9.9) 
-    set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D_GLIBCXX_USE_CXX11_ABI=0 ")
-    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_GLIBCXX_USE_CXX11_ABI=0 -static-libstdc++ ")
+  if(CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 4.9.9)
+    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libstdc++ ")
   endif()
 endif()
 
